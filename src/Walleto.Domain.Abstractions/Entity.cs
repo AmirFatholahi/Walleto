@@ -8,16 +8,16 @@ namespace Walleto.Domain.Abstractions
 {
     public abstract class Entity
     {
-        protected Entity(Guid id)
+        protected Entity(int id)
         {
-            Id = id;
+            ID = id;
         }
 
         protected Entity()
         {
         }
 
-        public Guid Id { get; protected set; }
+        public int ID { get; protected set; }
 
         public override bool Equals(object? obj)
         {
@@ -30,15 +30,15 @@ namespace Walleto.Domain.Abstractions
             if (GetType() != other.GetType())
                 return false;
 
-            return Id.Equals(other.Id);
+            return ID.Equals(other.ID);
         }
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            return ID.GetHashCode();
         }
 
-        public static bool operator ==(Entity? left, Entity? right)
+        public static bool operator == (Entity? left, Entity? right)
         {
             if (left is null && right is null)
                 return true;
@@ -49,7 +49,7 @@ namespace Walleto.Domain.Abstractions
             return left.Equals(right);
         }
 
-        public static bool operator !=(Entity? left, Entity? right)
+        public static bool operator != (Entity? left, Entity? right)
         {
             return !(left == right);
         }

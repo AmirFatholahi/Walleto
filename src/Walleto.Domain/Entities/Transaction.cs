@@ -30,7 +30,7 @@ public class Transaction : Entity
         if (string.IsNullOrWhiteSpace(description))
             throw new ArgumentException("Description cannot be empty", nameof(description));
 
-        Id = Guid.NewGuid();
+        ID = Guid.NewGuid();
         Type = type;
         Amount = amount ?? throw new ArgumentNullException(nameof(amount));
         CategoryId = categoryId;

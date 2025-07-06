@@ -22,7 +22,7 @@ public class CategoryTests
             "#FF5733");
 
         // Assert
-        category.Id.Should().NotBeEmpty();
+        category.ID.Should().NotBeEmpty();
         category.UserId.Should().Be(_userId);
         category.Name.Should().Be("Groceries");
         category.Type.Should().Be(CategoryType.Expense);
@@ -91,7 +91,7 @@ public class CategoryTests
         category.ClearDomainEvents();
 
         // Act
-        category.UpdateSubCategory(subCategory.Id, "Restaurants", "Dining out");
+        category.UpdateSubCategory(subCategory.ID, "Restaurants", "Dining out");
 
         // Assert
         var updated = category.SubCategories.First();

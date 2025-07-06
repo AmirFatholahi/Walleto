@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Walleto.Domain.Abstractions\Walleto.Domain.Abstractions.csproj" />
+    <ProjectReference Include="..\Walleto.Shared\Walleto.Shared.csproj" />
   </ItemGroup>
 
 </Project>

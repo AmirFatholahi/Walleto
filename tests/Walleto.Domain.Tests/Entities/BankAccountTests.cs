@@ -26,7 +26,7 @@ public class BankAccountTests
             _currency);
 
         // Assert
-        account.Id.Should().NotBeEmpty();
+        account.ID.Should().NotBeEmpty();
         account.UserId.Should().Be(_userId);
         account.AccountName.Should().Be("My Savings");
         account.BankName.Should().Be("Bank Melli");

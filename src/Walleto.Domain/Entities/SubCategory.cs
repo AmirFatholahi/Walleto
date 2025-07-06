@@ -17,7 +17,7 @@ public class SubCategory : Entity
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Subcategory name cannot be empty", nameof(name));
 
-        Id = Guid.NewGuid();
+        ID = Guid.NewGuid();
         Name = name.Trim();
         Description = description?.Trim();
         IsActive = true;

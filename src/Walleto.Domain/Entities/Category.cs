@@ -34,7 +34,7 @@ public class Category : AggregateRoot
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Category name cannot be empty", nameof(name));
 
-        Id = Guid.NewGuid();
+        ID = Guid.NewGuid();
         UserId = userId;
         Name = name.Trim();
         Type = type;
@@ -43,7 +43,7 @@ public class Category : AggregateRoot
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new CategoryCreatedEvent(Id, userId, name, type));
+        AddDomainEvent(new CategoryCreatedEvent(ID, userId, name, type));
     }
 
     public void UpdateInfo(string name, string? icon = null, string? color = null)
@@ -56,7 +56,7 @@ public class Category : AggregateRoot
         Color = color?.Trim();
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new CategoryUpdatedEvent(Id, name));
+        AddDomainEvent(new CategoryUpdatedEvent(ID, name));
     }
 
     public SubCategory AddSubCategory(string name, string? description = null)
@@ -74,48 +74,48 @@ public class Category : AggregateRoot
         _subCategories.Add(subCategory);
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new SubCategoryAddedEvent(Id, subCategory.Id, name));
+        AddDomainEvent(new SubCategoryAddedEvent(ID, subCategory.ID, name));
 
         return subCategory;
     }
 
     public void UpdateSubCategory(Guid subCategoryId, string name, string? description = null)
     {
-        var subCategory = _subCategories.FirstOrDefault(sc => sc.Id == subCategoryId);
+        var subCategory = _subCategories.FirstOrDefault(sc => sc.ID == subCategoryId);
         if (subCategory == null)
             throw new InvalidOperationException($"Subcategory with ID '{subCategoryId}' not found");
 
-        if (_subCategories.Any(sc => sc.Id != subCategoryId && sc.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+        if (_subCategories.Any(sc => sc.ID != subCategoryId && sc.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
             throw new InvalidOperationException($"Another subcategory with name '{name}' already exists");
 
         subCategory.Update(name, description);
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new SubCategoryUpdatedEvent(Id, subCategoryId, name));
+        AddDomainEvent(new SubCategoryUpdatedEvent(ID, subCategoryId, name));
     }
 
     public void DeactivateSubCategory(Guid subCategoryId)
     {
-        var subCategory = _subCategories.FirstOrDefault(sc => sc.Id == subCategoryId);
+        var subCategory = _subCategories.FirstOrDefault(sc => sc.ID == subCategoryId);
         if (subCategory == null)
             throw new InvalidOperationException($"Subcategory with ID '{subCategoryId}' not found");
 
         subCategory.Deactivate();
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new SubCategoryDeactivatedEvent(Id, subCategoryId));
+        AddDomainEvent(new SubCategoryDeactivatedEvent(ID, subCategoryId));
     }
 
     public void ActivateSubCategory(Guid subCategoryId)
     {
-        var subCategory = _subCategories.FirstOrDefault(sc => sc.Id == subCategoryId);
+        var subCategory = _subCategories.FirstOrDefault(sc => sc.ID == subCategoryId);
         if (subCategory == null)
             throw new InvalidOperationException($"Subcategory with ID '{subCategoryId}' not found");
 
         subCategory.Activate();
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new SubCategoryActivatedEvent(Id, subCategoryId));
+        AddDomainEvent(new SubCategoryActivatedEvent(ID, subCategoryId));
     }
 
     public void Deactivate()
@@ -132,7 +132,7 @@ public class Category : AggregateRoot
             subCategory.Deactivate();
         }
 
-        AddDomainEvent(new CategoryDeactivatedEvent(Id));
+        AddDomainEvent(new CategoryDeactivatedEvent(ID));
     }
 
     public void Activate()
@@ -143,6 +143,6 @@ public class Category : AggregateRoot
         IsActive = true;
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new CategoryActivatedEvent(Id));
+        AddDomainEvent(new CategoryActivatedEvent(ID));
     }
 }
