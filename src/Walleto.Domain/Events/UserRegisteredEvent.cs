@@ -4,13 +4,13 @@ namespace Walleto.Domain.Events;
 
 public class UserRegisteredEvent : DomainEvent
 {
-    public Guid UserId { get; }
+    public int UserID { get; }
     public string Email { get; }
     public string FullName { get; }
 
-    public UserRegisteredEvent(Guid userId, string email, string fullName)
+    public UserRegisteredEvent(int userID, string email, string fullName)
     {
-        UserId = userId;
+        UserID = userID;
         Email = email;
         FullName = fullName;
     }
@@ -18,42 +18,42 @@ public class UserRegisteredEvent : DomainEvent
 
 public class UserProfileUpdatedEvent : DomainEvent
 {
-    public Guid UserId { get; }
+    public int UserId { get; }
     public string NewFullName { get; }
 
-    public UserProfileUpdatedEvent(Guid userId, string newFullName)
+    public UserProfileUpdatedEvent(int userID, string newFullName)
     {
-        UserId = userId;
+        UserId = userID;
         NewFullName = newFullName;
     }
 }
 
 public class UserPasswordChangedEvent : DomainEvent
 {
-    public Guid UserId { get; }
+    public int UserID { get; }
 
-    public UserPasswordChangedEvent(Guid userId)
+    public UserPasswordChangedEvent(int userID)
     {
-        UserId = userId;
+        UserID = userID;
     }
 }
 
 public class UserDeactivatedEvent : DomainEvent
 {
-    public Guid UserId { get; }
+    public int UserID { get; }
 
-    public UserDeactivatedEvent(Guid userId)
+    public UserDeactivatedEvent(int userID)
     {
-        UserId = userId;
+        UserID = userID;
     }
 }
 
 public class UserActivatedEvent : DomainEvent
 {
-    public Guid UserId { get; }
+    public int UserID { get; }
 
-    public UserActivatedEvent(Guid userId)
+    public UserActivatedEvent(int userID)
     {
-        UserId = userId;
+        UserID = userID;
     }
 }

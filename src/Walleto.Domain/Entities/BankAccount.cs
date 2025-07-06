@@ -40,7 +40,7 @@ public class BankAccount : AggregateRoot
         if (string.IsNullOrWhiteSpace(bankName))
             throw new ArgumentException("Bank name cannot be empty", nameof(bankName));
 
-        Id = Guid.NewGuid();
+        ID = Guid.NewGuid();
         UserId = userId;
         AccountName = accountName.Trim();
         BankName = bankName.Trim();
@@ -49,7 +49,7 @@ public class BankAccount : AggregateRoot
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new BankAccountCreatedEvent(Id, userId, accountName, bankName));
+        AddDomainEvent(new BankAccountCreatedEvent(ID, userId, accountName, bankName));
     }
 
     public void RecordIncome(
@@ -77,7 +77,7 @@ public class BankAccount : AggregateRoot
         Balance = Balance.Add(amount);
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new IncomeRecordedEvent(Id, transaction.Id, amount));
+        AddDomainEvent(new IncomeRecordedEvent(ID, transaction.ID, amount));
     }
 
     public void RecordExpense(
@@ -108,7 +108,7 @@ public class BankAccount : AggregateRoot
         Balance = Balance.Subtract(amount);
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new ExpenseRecordedEvent(Id, transaction.Id, amount));
+        AddDomainEvent(new ExpenseRecordedEvent(ID, transaction.ID, amount));
     }
 
     public void UpdateAccountInfo(string accountName, string bankName)
@@ -123,7 +123,7 @@ public class BankAccount : AggregateRoot
         BankName = bankName.Trim();
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new BankAccountUpdatedEvent(Id, accountName, bankName));
+        AddDomainEvent(new BankAccountUpdatedEvent(ID, accountName, bankName));
     }
 
     public void Deactivate()
@@ -134,7 +134,7 @@ public class BankAccount : AggregateRoot
         IsActive = false;
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new BankAccountDeactivatedEvent(Id));
+        AddDomainEvent(new BankAccountDeactivatedEvent(ID));
     }
 
     public void Activate()
@@ -145,7 +145,7 @@ public class BankAccount : AggregateRoot
         IsActive = true;
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new BankAccountActivatedEvent(Id));
+        AddDomainEvent(new BankAccountActivatedEvent(ID));
     }
 
     // Method to set initial balance when importing from bank
@@ -160,6 +160,6 @@ public class BankAccount : AggregateRoot
         Balance = balance;
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new BankAccountBalanceSetEvent(Id, balance));
+        AddDomainEvent(new BankAccountBalanceSetEvent(ID, balance));
     }
 }

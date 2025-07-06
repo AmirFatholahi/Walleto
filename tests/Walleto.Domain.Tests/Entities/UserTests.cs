@@ -10,7 +10,7 @@ public class UserTests
 {
     private Email ValidEmail => new("test@example.com");
     private Password ValidPassword => Password.Create("Test123!");
-    private PersonName ValidName => new("John", "Doe");
+    private FullName ValidName => new("John", "Doe");
 
     [Fact]
     public void Constructor_WithValidData_CreatesUser()
@@ -19,7 +19,7 @@ public class UserTests
         var user = new User(ValidEmail, ValidPassword, ValidName);
 
         // Assert
-        user.Id.Should().NotBeEmpty();
+        user.ID.Should().NotBeEmpty();
         user.Email.Should().Be(ValidEmail);
         user.Password.Should().Be(ValidPassword);
         user.Name.Should().Be(ValidName);
@@ -38,7 +38,7 @@ public class UserTests
         user.DomainEvents.Should().ContainSingle();
         var domainEvent = user.DomainEvents.First() as UserRegisteredEvent;
         domainEvent.Should().NotBeNull();
-        domainEvent!.UserId.Should().Be(user.Id);
+        domainEvent!.UserID.Should().Be(user.ID);
         domainEvent.Email.Should().Be(ValidEmail.Value);
         domainEvent.FullName.Should().Be(ValidName.FullName);
     }
