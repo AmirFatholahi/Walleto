@@ -10,7 +10,7 @@ namespace Walleto.Domain.ValueObjects
 {
     public class BirthDate : ValueObject
     {
-        public string birthDate { get; }
+        public string Value { get; }
 
         public BirthDate(string shamsiDate)
         {
@@ -19,14 +19,14 @@ namespace Walleto.Domain.ValueObjects
 
             if (!Calendar.IsAgeGreatherThan18(shamsiDate))
                 throw new ArgumentException("تاریخ تولد نمی‌تواند در آینده باشد", nameof(shamsiDate));
-            birthDate = shamsiDate;
+            Value = shamsiDate;
         }
 
 
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return birthDate;
+            yield return Value;
         }
     }
 }

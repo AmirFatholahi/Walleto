@@ -24,7 +24,7 @@ public class User : AggregateRoot
         IsActive = true;
         IsDeleted = false;
 
-        AddDomainEvent(new UserRegisteredEvent(ID, Email.Value, FullName.fullName));
+        AddDomainEvent(new UserRegisteredEvent(ID, Email.Value, FullName.Value));
     }
 
 
@@ -53,7 +53,7 @@ public class User : AggregateRoot
         ModifierId = modifierId;
         ModificationDateTime = DateTime.UtcNow;
 
-        AddDomainEvent(new UserProfileUpdatedEvent(ID, FullName.fullName));
+        AddDomainEvent(new UserProfileUpdatedEvent(ID, FullName.Value));
     }
 
     public void ChangePassword(Password newPassword, string currentPassword, int modifierId)
